@@ -1,0 +1,62 @@
+## MariaDB deployment using docker
+<hr>
+
+### Stacks:
+- MariaDB 10.x
+- Docker
+- PMA
+- Backup by cron
+
+### Steps
+- create dir
+```
+mkdir -p /var/lib/mariadb
+```
+
+- goto dir and clone
+```
+cd /var/lib/mariadb
+git clone https://github.com/rendyproklamanta/docker-mariadb.git .
+```
+
+- Change Password in .env
+```
+nano /var/lib/mariadb/.env
+```
+
+- Adding port to firewall
+```
+ufw allow 3306
+```
+
+- Set permission if using linux
+```
+chmod +x start.sh
+```
+
+- Run script
+```
+On Linux
+./start.sh
+
+On Windows OR non docker-swarm
+./start.non-swarm.sh
+```
+
+- Enable auto start on reboot and re-sync mariadb :
+```
+> Enable startup service :
+cp mariadb-repl.service /etc/systemd/system/mariadb-repl.service
+sudo systemctl enable mariadb-repl.service
+
+> Check status after reboot :
+sudo journalctl -u mariadb-repl.service
+```
+
+### Access :
+- Access database using PMA
+```
+Link : http://localhost:8000 or http://[YOUR_IP_ADDRESS]:8000
+user : root
+pass : MY_PASSWORD
+```

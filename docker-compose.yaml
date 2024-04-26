@@ -1,0 +1,66 @@
+version: '3.9'
+
+services:
+
+  mariadb:
+    image: mariadb:lts
+    env_file:
+      - .env
+    volumes:
+      - ./data/db:/var/lib/mariadb
+      - ./my.cnf:/etc/mariadb/conf.d/mariadb.cnf
+    command: bash -c "chmod 644 /etc/mariadb/conf.d/mariadb.cnf && docker-entrypoint.sh mysqld"
+    environment:
+      - TZ="Asia/jakarta"
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 3306:3306
+    networks:
+      - mariadb-network
+      # - bridge
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mariadb
+    ports:
+      - 8000:80
+    environment:
+      - TZ=Asia/Jakarta
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306
+      - UPLOAD_LIMIT=2G
+      - MEMORY_LIMIT=500M
+      - MAX_EXECUTION_TIME=1000
+    networks:
+      - mariadb-network
+      # - bridge
+
+  mariadb-cron-backup:
+    image: fradelg/mysql-cron-backup
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    volumes:
+      - ./data/backup:/backup
+    environment:
+      - TZ=Asia/Jakarta
+      - MYSQL_PORT=3306
+      - MYSQL_HOST=mariadb
+      - MYSQL_USER=root
+      - MYSQL_PASS=${MYSQL_ROOT_PASSWORD}
+      - MAX_BACKUPS=4
+      - INIT_BACKUP=0
+      - CRON_TIME=0 */6 * * *
+    networks:
+      - mariadb-network
+      # - bridge
+
+networks:
+  mariadb-network:
+    external: true
+
+# networks:
+#   bridge:
+#     driver: bridge
