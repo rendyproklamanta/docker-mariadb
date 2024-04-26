@@ -19,9 +19,10 @@ cd /var/lib/mariadb
 git clone https://github.com/rendyproklamanta/docker-mariadb.git .
 ```
 
-- Change Password in .env
+- Edit environment in .env and init.sql
 ```
 nano /var/lib/mariadb/.env
+nano /var/lib/mariadb/init.sql
 ```
 
 - Adding port to firewall

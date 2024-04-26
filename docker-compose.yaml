@@ -9,15 +9,18 @@ services:
     volumes:
       - ./data/db:/var/lib/mariadb
       - ./my.cnf:/etc/mariadb/conf.d/mariadb.cnf
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     command: bash -c "chmod 644 /etc/mariadb/conf.d/mariadb.cnf && docker-entrypoint.sh mysqld"
     environment:
       - TZ="Asia/jakarta"
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER_NAME}
+      - MYSQL_PASSWORD=${MYSQL_USER_PASS}
     ports:
       - 3306:3306
     networks:
       - mariadb-network
-      # - bridge
+      #- bridge
 
   pma:
     image: phpmyadmin/phpmyadmin
@@ -34,7 +37,7 @@ services:
       - MAX_EXECUTION_TIME=1000
     networks:
       - mariadb-network
-      # - bridge
+      #- bridge
 
   mariadb-cron-backup:
     image: fradelg/mysql-cron-backup
@@ -55,7 +58,7 @@ services:
       - CRON_TIME=0 */6 * * *
     networks:
       - mariadb-network
-      # - bridge
+      #- bridge
 
 networks:
   mariadb-network:
