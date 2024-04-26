@@ -9,13 +9,10 @@ services:
     volumes:
       - ./data/db:/var/lib/mariadb
       - ./my.cnf:/etc/mariadb/conf.d/mariadb.cnf
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     command: bash -c "chmod 644 /etc/mariadb/conf.d/mariadb.cnf && docker-entrypoint.sh mysqld"
     environment:
       - TZ="Asia/jakarta"
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER_NAME}
-      - MYSQL_PASSWORD=${MYSQL_USER_PASS}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
     ports:
       - 3306:3306
     networks:
@@ -52,7 +49,7 @@ services:
       - MYSQL_PORT=3306
       - MYSQL_HOST=mariadb
       - MYSQL_USER=root
-      - MYSQL_PASS=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASS=${MARIADB_ROOT_PASSWORD}
       - MAX_BACKUPS=4
       - INIT_BACKUP=0
       - CRON_TIME=0 */6 * * *
