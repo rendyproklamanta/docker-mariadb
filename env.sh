@@ -1,0 +1,3 @@
+#!/bin/bash
+
+export MARIADB_ROOT_PASSWORD="MY_PASSWORD"

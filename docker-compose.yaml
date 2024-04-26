@@ -4,8 +4,6 @@ services:
 
   mariadb:
     image: mariadb:lts
-    env_file:
-      - .env
     volumes:
       - ./data/db:/var/lib/mariadb
       - ./my.cnf:/etc/mariadb/conf.d/mariadb.cnf

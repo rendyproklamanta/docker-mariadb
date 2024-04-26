@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source env.sh
+
 # Create dir and set permission
 mkdir -p data/db
 mkdir -p data/backup

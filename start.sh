@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source env.sh
+
 docker network create --driver overlay mariadb-network
 
 # Stopping all services
