@@ -5,9 +5,10 @@ services:
   mariadb:
     image: mariadb:lts
     volumes:
-      - ./data/db:/var/lib/mariadb
-      - ./my.cnf:/etc/mariadb/conf.d/mariadb.cnf
-    command: bash -c "chmod 644 /etc/mariadb/conf.d/mariadb.cnf && docker-entrypoint.sh mysqld"
+      - ./data/db:/var/lib/mysql
+      # - /mnt/blockstorage/mariadb/data:/var/lib/mysql
+      - ./mariadb.cnf:/etc/mysql/conf.d/mariadb.cnf
+    command: bash -c "chmod 644 /etc/mysql/conf.d/mariadb.cnf && docker-entrypoint.sh mysqld"
     environment:
       - TZ="Asia/jakarta"
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
