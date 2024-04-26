@@ -49,7 +49,7 @@ On Windows OR non docker-swarm
 cp mariadb-stack.service /etc/systemd/system/mariadb-stack.service
 sudo systemctl enable mariadb-stack.service
 
-> Check status after reboot :
+> Reboot and check status  :
 sudo journalctl -u mariadb-stack.service
 ```
 

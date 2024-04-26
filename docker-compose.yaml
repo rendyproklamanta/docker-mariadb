@@ -28,9 +28,9 @@ services:
       - TZ=Asia/Jakarta
       - PMA_HOST=mariadb
       - PMA_PORT=3306
-      - UPLOAD_LIMIT=2G
-      - MEMORY_LIMIT=500M
-      - MAX_EXECUTION_TIME=1000
+      - UPLOAD_LIMIT=100G
+      - MEMORY_LIMIT=1G
+      - MAX_EXECUTION_TIME=43200
     networks:
       - mariadb-network
       #- bridge
@@ -43,6 +43,7 @@ services:
       - .env
     volumes:
       - ./data/backup:/backup
+      # - /mnt/blockstorage/mariadb/backup:/backup
     environment:
       - TZ=Asia/Jakarta
       - MYSQL_PORT=3306
