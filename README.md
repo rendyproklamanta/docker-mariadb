@@ -19,7 +19,7 @@ cd /var/lib/mariadb
 git clone https://github.com/rendyproklamanta/docker-mariadb.git .
 ```
 
-- Edit environment in .env and init.sql
+- Edit environment in .env
 ```
 nano /var/lib/mariadb/.env
 ```
@@ -46,11 +46,11 @@ On Windows OR non docker-swarm
 - Enable auto start on reboot and re-sync mariadb :
 ```
 > Enable startup service :
-cp mariadb-repl.service /etc/systemd/system/mariadb-repl.service
-sudo systemctl enable mariadb-repl.service
+cp mariadb-stack.service /etc/systemd/system/mariadb-stack.service
+sudo systemctl enable mariadb-stack.service
 
 > Check status after reboot :
-sudo journalctl -u mariadb-repl.service
+sudo journalctl -u mariadb-stack.service
 ```
 
 ### Access :
