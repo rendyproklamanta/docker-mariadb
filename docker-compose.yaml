@@ -35,7 +35,7 @@ services:
       - mariadb-network
       #- bridge
 
-  mariadb-cron-backup:
+  cron-backup:
     image: fradelg/mysql-cron-backup
     depends_on:
       - mariadb
