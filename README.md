@@ -34,7 +34,7 @@ nano /var/lib/mysql/env.sh
 ufw allow 3306
 ```
 
-- Set permission if using linux
+- Start script
 
 ```shell
 chmod +x start.sh

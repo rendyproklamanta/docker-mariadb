@@ -39,8 +39,6 @@ services:
     image: fradelg/mysql-cron-backup
     depends_on:
       - mariadb
-    env_file:
-      - .env
     volumes:
       - ./data/backup:/backup
       # - /mnt/blockstorage/mariadb/backup:/backup
