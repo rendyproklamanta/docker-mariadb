@@ -25,7 +25,7 @@ git clone https://github.com/rendyproklamanta/docker-mariadb.git .
 - Edit environment in .env
 
 ```shell
-nano /var/lib/mysql/.env
+nano /var/lib/mysql/env.sh
 ```
 
 - Adding port to firewall
